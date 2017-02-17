@@ -1,0 +1,93 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="SupervisorMaster.master.cs" Inherits="SupervisorMaster" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Kiwihort - Portal</title>
+    
+    <link rel="stylesheet" href="../css/workerDashboard.css" type="text/css" />
+    <link rel="stylesheet" href="../css/supervisorDashboard.css" type="text/css" />
+    <link rel="stylesheet" href="../css/master.css" type="text/css" />
+    <link rel="stylesheet" href="../css/messaging.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet" />
+    
+    <script src="../js/workerDashboard.js" type="text/javascript"></script>
+    <script src="../js/jquery.js" type="text/javascript"></script>
+    <script src="../js/jquery-ui.js" type="text/javascript"></script>
+
+
+    <asp:ContentPlaceHolder ID="Header" runat="server"></asp:ContentPlaceHolder>
+
+     
+</head>
+<body id="li_signOut">
+
+    <div class="overlay" onclick="toggleLeftNav();"></div>
+
+    <form id="form2" runat="server" method="post" class="sigPad">
+        <div class="top-nav">
+
+            <div class="menu-icon" onclick="toggleLeftNav();">
+                <span>☰</span>
+            </div>
+
+            <div class="top-nav-middle">
+                <h3><asp:Label ID="lbl_title" runat="server" Text="Dashboard"></asp:Label></h3>
+            </div>
+            <div class="top-nav-right">
+                <div class="profile-holder" onclick="toggleAccountDropdown()">
+                    <img runat="server" src="../img/profilePicture1.png" id="img_profile" class="profile-image" />
+                    <h3><asp:Label ID="lbl_name" runat="server" Text="lbl_name"></asp:Label>
+                    </h3><img src="../img/arrow-down.png" class="down-arrow" />
+                </div>
+                <div class="notifiation-holder">
+                    <%--<div class="single-notification-icon">
+                        <img src="../img/notification-icon.png" class="notification-icon" onclick="toggleNotifications()" />
+                    </div>--%>
+                    <div class="single-notification-icon">
+                         <a href="SupervisorMessage.aspx"><img src="../img/message-icon.png" class="notification-icon" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img src="../img/nav-active-arrow.png" class="nav-active-arrow" />
+        <div class="left-nav">
+            <div class="left-nav-top">
+                <h3>Menu</h3>
+            </div>
+            
+            <div class="left-nav-list">
+                <ul>
+                    <a href="SupervisorHome.aspx" onclick="moveIcon(0)"><li class="li-active"><img src="../img/dashboard-icon.png" class="nav-icon" />Dashboard</li></a>
+                    <a href="SupervisorAttendance.aspx" onclick="moveIcon(1)"><li><img src="../img/people-icon.png" class="nav-icon" />Attendance</li></a>
+                    <%--<a href="WorkerOrganiser.aspx" onclick="moveIcon(2)"><li><img src="../img/calender-icon.png" class="nav-icon" />Organiser</li></a>--%>
+                    <%--<a href="#" onclick="moveIcon(3)"><li><img src="../img/weather-icon2.png" class="nav-icon" />Weather</li></a>
+                    <a href="#" onclick="moveIcon(4)"><li><img src="../img/icon.png" class="nav-icon" />Budget</li></a>
+                    <a href="#" onclick="moveIcon(5)"><li><img src="../img/payroll-icon.png" class="nav-icon" />Payroll</li></a>--%>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <asp:ContentPlaceHolder ID="cph_mainSection" runat="server">
+            </asp:ContentPlaceHolder>
+            
+        </div>
+        <div class="account-dropdown">
+            <ul class="dropdown-button">
+                <li><a href="SupervisorProfile.aspx">Profile Settings</a></li>
+                <asp:LinkButton ID="btn_logOut" class="signoutbutton" runat="server" OnClick="btn_logOut_Click"><li class="signoutbutton">Sign Out</li></asp:LinkButton>
+                <%--<asp:LinkButton ID="btn_signOut" runat="server" OnClick="btn_signOut_Click"><li>Sign Out</li></asp:LinkButton>--%>
+                
+            </ul>
+        </div>
+    </form>
+
+
+</body>
+</html>

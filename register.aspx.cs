@@ -97,20 +97,10 @@ public partial class register : System.Web.UI.Page
                 {
                     type = "monitor";
                 }
-                SqlCommand comAccount = null;
-                if (type == "worker")
-                {
-                    comAccount = new SqlCommand("INSERT INTO tbl_" + type + " (" + type + "sId, FirstName, LastName, payrate) VALUES (@0, @1, @2 @3)", con);
-                    comAccount.Parameters.AddWithValue("@3", "15.75");
-                }
-                else
-                {
-                    comAccount = new SqlCommand("INSERT INTO tbl_" + type + " (" + type + "sId, FirstName, LastName) VALUES (@0, @1, @2)", con);
-                }
+                SqlCommand comAccount = new SqlCommand("INSERT INTO tbl_" + type + " (" + type + "sId, FirstName, LastName) VALUES (@0, @1, @2)", con);
                 comAccount.Parameters.AddWithValue("@0", idStr);
                 comAccount.Parameters.AddWithValue("@1", txt_firstName.Text.ToString());
                 comAccount.Parameters.AddWithValue("@2", txt_lastName.Text.ToString());
-
 
                 SqlCommand comCode = new SqlCommand("INSERT INTO tbl_employees VALUES (@0, @1)", con);
                 comCode.Parameters.AddWithValue("@0", idStr);
