@@ -15,7 +15,7 @@
         
     <asp:Button ID="btn_submit" runat="server" Text="Submit" OnClick="btn_submit_Click" />
 
-    <asp:RangeValidator MinimumValue="12.20" MaximumValue="50" ID="RangeValidator1" runat="server" ErrorMessage="Worker pay can't be less than $12.20 or greater than $50.00" ControlToValidate="txt_pay"></asp:RangeValidator>
+    <asp:RangeValidator MinimumValue="15.75" MaximumValue="50" ID="RangeValidator1" runat="server" ErrorMessage="Worker pay can't be less than $15.75 or greater than $50.00" ControlToValidate="txt_pay"></asp:RangeValidator>
 
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
         <Columns>

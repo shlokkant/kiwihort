@@ -63,7 +63,7 @@
             
             <div class="left-nav-list">
                 <ul>
-                    <a href="SupervisorHome.aspx" onclick="moveIcon(0)"><li class="li-active"><img src="../img/dashboard-icon.png" class="nav-icon" />Dashboard</li></a>
+                    <a href="SupervisorHome.aspx"><li class="li-active"><img src="../img/dashboard-icon.png" class="nav-icon" />Dashboard</li></a>
                     <a href="SupervisorAttendance.aspx" onclick="moveIcon(1)"><li><img src="../img/people-icon.png" class="nav-icon" />Attendance</li></a>
                     <%--<a href="WorkerOrganiser.aspx" onclick="moveIcon(2)"><li><img src="../img/calender-icon.png" class="nav-icon" />Organiser</li></a>--%>
                     <%--<a href="#" onclick="moveIcon(3)"><li><img src="../img/weather-icon2.png" class="nav-icon" />Weather</li></a>

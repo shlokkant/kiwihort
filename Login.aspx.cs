@@ -16,6 +16,12 @@ public partial class Login : System.Web.UI.Page
 
     protected void btn_submit_Click(object sender, EventArgs e)
     {
+        if(Session["registerNew"] != null)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Please accept the confirmation email before logging in.');", true);
+            Session.Clear();
+        }
+
         //if (txt_email.Text == "admin@kiwihort.com" && txt_password.Text == "Kiwihort1234")
         //{
         //    Session["email"] = "admin@admin.com";

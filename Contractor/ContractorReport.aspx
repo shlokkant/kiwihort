@@ -13,6 +13,7 @@
         <asp:DropDownList ID="cbo_week" class="dropdown dropdown-week" runat="server" OnSelectedIndexChanged="cbo_week_SelectedIndexChanged" autopostback="true"></asp:DropDownList>
         <asp:DropDownList ID="cbo_farm" class="dropdown dropdown-farm" runat="server"></asp:DropDownList>
         <asp:Button ID="btn_submit" class="get-report-button" runat="server" Text="Get Report" OnClick="btn_submit_Click" />
+        <asp:Button ID="btn_excel" class="get-report-button" runat="server" Text="Download Excel File" OnClick="btn_excel_Click" />
     </div>
 
     <div class="report-table">

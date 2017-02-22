@@ -85,7 +85,10 @@
                     <a href="#" onclick="moveIcon(5)"><li><img src="../img/payroll-icon.png" class="nav-icon" />Payroll</li></a>--%>
                     <a href="ContractorReport.aspx" onclick="moveIcon(2)"><li><img src="../img/people-icon.png" class="nav-icon" />Reports</li></a>
                     <a href="ContractorAssignPay.aspx" onclick="moveIcon(3)"><li><img src="../img/payroll-icon.png" class="nav-icon" />Assign Worker Pay</li></a>
+              
                 </ul>
+                   
+                  <img src="../img/logo.png"  style="height: 5vh;position: fixed;top: 88vh;left: 56px;/* margin-bottom: 7px; *//* margin-top: 33%; *//* padding-left: 29%; */" /><div style="position: fixed;color: #dddddd;font-family: 'Roboto';font-size: 11px;align-content: center;top: 94vh;left: 59px;/* padding-left: 33%; */">Version 1.0.0</div>
             </div>
         </div>
         
@@ -176,6 +179,7 @@
                 </div>
             </div>
         </div>
+        <%--<div id="footer" style="width:100% ; height:20px; background-color:black; color:white;z-index: 100;    position: absolute;   margin-top: 97vh;">Hypernova ltd</div>--%>
     </form>
 </body>
 </html>

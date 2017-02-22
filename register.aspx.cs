@@ -68,7 +68,7 @@ public partial class register : System.Web.UI.Page
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Please enter a valid code');", true);
                 }
             }
-            else if(cbo_registerAs.SelectedValue == "Grower")
+            else if(cbo_registerAs.SelectedValue == "Contractor")
             {
                 type = "grower";
                 validCode = true;
@@ -97,22 +97,45 @@ public partial class register : System.Web.UI.Page
                 {
                     type = "monitor";
                 }
-                SqlCommand comAccount = new SqlCommand("INSERT INTO tbl_" + type + " (" + type + "sId, FirstName, LastName) VALUES (@0, @1, @2)", con);
+                SqlCommand comAccount = null;
+                if (type == "worker")
+                {
+                    SqlCommand comPay = new SqlCommand("INSERT INTO tbl_pay (pay, lastUpdate) VALUES (15.75, @0)", con);
+                    comPay.Parameters.AddWithValue("@0", DateTime.UtcNow);
+                    comPay.ExecuteScalar();
+
+                    comPay.Parameters.Clear();
+                    comPay = new SqlCommand("SELECT max(payID) FROM tbl_pay");
+
+
+                    comAccount = new SqlCommand("INSERT INTO tbl_" + type + " (" + type + "sId, FirstName, LastName, payrate) VALUES (@0, @1, @2, @3)", con);
+                    comAccount.Parameters.AddWithValue("@3", comPay.ExecuteScalar().ToString());
+                    comPay.Dispose();
+                }
+                else
+                {
+                    comAccount = new SqlCommand("INSERT INTO tbl_" + type + " (" + type + "sId, FirstName, LastName) VALUES (@0, @1, @2)", con);
+                }
                 comAccount.Parameters.AddWithValue("@0", idStr);
                 comAccount.Parameters.AddWithValue("@1", txt_firstName.Text.ToString());
                 comAccount.Parameters.AddWithValue("@2", txt_lastName.Text.ToString());
 
-                SqlCommand comCode = new SqlCommand("INSERT INTO tbl_employees VALUES (@0, @1)", con);
-                comCode.Parameters.AddWithValue("@0", idStr);
-                comCode.Parameters.AddWithValue("@1", Session["gId"].ToString());
-                Session.Remove("gId");
+                if (type == "worker")
+                {
+                    SqlCommand comCode = new SqlCommand("INSERT INTO tbl_employees VALUES (@0, @1)", con);
+                    comCode.Parameters.AddWithValue("@0", idStr);
+                    comCode.Parameters.AddWithValue("@1", Session["gId"].ToString());
+                    Session.Remove("gId");
+                    comCode.ExecuteReader();
+                    comCode.Dispose();
+                }
 
-                comCode.ExecuteReader();
+                
                 comLogin.ExecuteReader();
                 comAccount.ExecuteReader();
                 comLogin.Dispose();
                 comAccount.Dispose();
-                comCode.Dispose();
+                
                 SqlCommand comAccount1 = new SqlCommand("INSERT INTO tbl_UserAct (Id,ActCode) VALUES (@0, @1)", con);
                 comAccount1.Parameters.AddWithValue("@0", idStr);
 
@@ -143,7 +166,7 @@ public partial class register : System.Web.UI.Page
 
 
                 }
-
+                Session["registerNew"] = "true";
                 Response.Redirect("Login.aspx");
             }
         }

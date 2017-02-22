@@ -79,8 +79,8 @@
 <asp:Content ID="Content1" runat="server" contentplaceholderid="cph_mainSection">
 
   <%--  <asp:Button ID="Button1" runat="server" Text="Check Start Times" OnClientClick="return Drawdot()" OnClick="Button1_Click" class="big-button"/>--%>
-  <asp:LinkButton ID="LinkButton2" class="big-button" runat="server" OnClick="Button1_Click">Check Start Times</asp:LinkButton>
-      <asp:LinkButton ID="LinkButton1" class="big-button" runat="server" OnClick="Button2_Click">Check Finish Times</asp:LinkButton>
+  <asp:LinkButton ID="LinkButton2" class="big-button" runat="server" style="padding: 7px; padding-right: 20px; padding-left: 20px;" OnClick="Button1_Click">Check Start Times</asp:LinkButton>
+      <asp:LinkButton ID="LinkButton1" class="big-button" runat="server" style="padding: 7px; padding-right: 20px; padding-left: 20px;" OnClick="Button2_Click">Check Finish Times</asp:LinkButton>
     <%--<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
     <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
     <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
@@ -250,6 +250,7 @@ INNER JOIN [dbo].[tbl_Attendance] on  [dbo].[tbl_Attendance].[RosterID]=[dbo].[t
     $(document).ready(function() {
       $('.sigPad').signaturePad({drawOnly:true});
     });
+    moveIcon(1);
   </script>
   <script src="../js/json2.min.js"></script>
   <image id="embedImage"></image>

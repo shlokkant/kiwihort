@@ -214,6 +214,8 @@ public partial class Supervisor_SupervisorAttendance : System.Web.UI.Page
             foreach (GridViewRow row in GridView3.Rows)
             {
                 TextBox dhu = row.FindControl("txt_time") as TextBox;
+                DropDownList dl = (DropDownList)row.FindControl("cbo_block");
+
 
                 CheckBox chkC = row.FindControl("chkRow") as CheckBox;
                 if (chkC.Checked) //If the checkbox has been checked
@@ -222,9 +224,7 @@ public partial class Supervisor_SupervisorAttendance : System.Web.UI.Page
                     //HiddenField hd = row.FindControl("RosterID") as HiddenField;
                     //string str = hd.Value;
 
-                    DropDownList dl = (DropDownList)row.FindControl("cbo_block");
-
-
+                   
                     com.Parameters.AddWithValue("@0", GridView3.DataKeys[count].Values["RosterID"].ToString());
 
                     com.Parameters.AddWithValue("@1", (row.Cells[3].Text));
@@ -248,7 +248,9 @@ public partial class Supervisor_SupervisorAttendance : System.Web.UI.Page
 
                     com.Parameters.AddWithValue("@1", time.Text);
                     //add 'cbo_block' into insert
-                    com.Parameters.AddWithValue("@2", row.FindControl("cbo_block"));
+
+                    com.Parameters.AddWithValue("@2", dl.SelectedIndex.ToString());
+                    com.Parameters.AddWithValue("@3", pathimg = "~/signaturePictures/" + GridView3.DataKeys[count].Values["RosterID"].ToString() + dt.ToString().Replace(':', '-').Replace('/', '-').Replace('\\', '-').Replace(' ', '-') + ".png");
 
                     com.ExecuteReader();
 

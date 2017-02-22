@@ -11,6 +11,8 @@
     <script src="../js/jsign.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script type="text/javascript">
+
+
             function test() {
                 var canvas = document.getElementById('thecanvas');
               
@@ -184,7 +186,7 @@
         </div>
 
 
-        <div class="single-day-time">
+        <div class="single-day-time" style="padding-top: 40px;">
             <span class="single-day-time-day">Monday</span>
             Start: <asp:TextBox ID="txt_mondayStart" runat="server" CausesValidation="True" CssClass="timeInput" TextMode="Time" Enabled="False" ReadOnly="True"></asp:TextBox>
             End:

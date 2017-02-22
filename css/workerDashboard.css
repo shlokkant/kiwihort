@@ -559,26 +559,26 @@ div.aw-widget-current-inner div.aw-widget-content.bg-cl, div.aw-widget-current-i
 .aw-widget-current div.aw-widget-current-inner div.aw-widget-content a.aw-current-weather h3 {
     color: #444 !important;
     font-family: Roboto !important;
-    font-weight: 100 !important;
+    font-weight: 400 !important;
 }
 
 .aw-widget-current div.aw-widget-current-inner div.aw-widget-content a.aw-current-weather p span.aw-temperature-today b {
     color: #444 !important;
     font-family: Roboto !important;
-    font-weight: 100 !important;
+    font-weight: 400 !important;
 }
 
 .aw-widget-current div.aw-widget-current-inner div.aw-widget-content a.aw-current-weather p time {
     color: #444 !important;
     font-family: Roboto !important;
-    font-weight: 100 !important;
+    font-weight: 400 !important;
 }
 
 
 .aw-widget-current div.aw-widget-current-inner div.aw-widget-content a.aw-current-weather p span.aw-weather-description {
     color: #444 !important;
     font-family: Roboto !important;
-    font-weight: 100 !important;
+    font-weight: 400 !important;
 }
 
 

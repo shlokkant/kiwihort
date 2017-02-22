@@ -13,6 +13,11 @@ public partial class Contractor_ContractorAssignPay : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        SqlDataSource1.SelectCommand = "SELECT RTRIM(firstname) + ' ' + RTRIM(lastname) AS name, '$' + CAST(CAST(payrate AS MONEY) AS VARCHAR(MAX)) AS payrate FROM tbl_worker INNER JOIN[dbo].[tbl_employees] on[dbo].[tbl_employees].[workersid]= [tbl_worker].[WorkersId] where[dbo].[tbl_employees].[growersid]=@0";
+        SqlDataSource1.SelectParameters.Clear();
+        SqlDataSource1.SelectParameters.Add("0", Session["Id"].ToString());
+
+        SqlDataSource1.DataBind();
 
 
         if (Session["Id"] == null)
@@ -35,16 +40,21 @@ public partial class Contractor_ContractorAssignPay : System.Web.UI.Page
             com.Parameters.AddWithValue("@0", Session["Id"]);
 
             SqlDataReader reader = com.ExecuteReader();
-
-            if (reader.HasRows)
+            reader.Read();
+            if (reader.HasRows == true && String.Compare(reader.GetValue(0).ToString(), null) != 0)
             {
-                while (reader.Read())
-                {
-                    cbo_worker.Items.Add(new ListItem(Convert.ToString(reader["FirstName"]) + " " + Convert.ToString(reader["LastName"]), Convert.ToString(reader["workersId"])));
-                }
+                
+                
+                
+                    while (reader.Read())
+                    {
+                        cbo_worker.Items.Add(new ListItem(Convert.ToString(reader["FirstName"]) + " " + Convert.ToString(reader["LastName"]), Convert.ToString(reader["workersId"])));
+                    }
+
+
+                cbo_worker_SelectedIndexChanged(null, null);
             }
 
-            cbo_worker_SelectedIndexChanged(null, null);
 
         }
 
@@ -60,6 +70,8 @@ public partial class Contractor_ContractorAssignPay : System.Web.UI.Page
         SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["KiwihortData"].ConnectionString);
 
         con.Open();
+
+        //SqlCommand com = new SqlCommand("INSERT INTO tbl_update () VALUES (@0, )")
 
         SqlCommand com = new SqlCommand("UPDATE tbl_worker SET payrate = @0 FROM tbl_duty WHERE WorkersId = @1", con);
         com.Parameters.AddWithValue("@0", txt_pay.Text);

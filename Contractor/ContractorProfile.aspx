@@ -30,35 +30,35 @@
     <h3 style="text-align: center; margin-top: 20px;">Edit Profile</h3>
             
         <h3>First Name</h3>
-        <asp:TextBox ID="txt_firstName" class="profileSettingsTextBox" runat="server" CausesValidation="True"></asp:TextBox>
+        <asp:TextBox ID="txt_firstName" class="profileSettingsTextBox" runat="server" CausesValidation="True" AutoPostBack="True" OnTextChanged="txt_firstName_TextChanged"></asp:TextBox>
         
         <h3>Middle Name</h3>
-        <asp:TextBox ID="txt_middleName" class="profileSettingsTextBox" runat="server" CausesValidation="True"></asp:TextBox>
+        <asp:TextBox ID="txt_middleName" class="profileSettingsTextBox" runat="server" CausesValidation="True" AutoPostBack="True" OnTextChanged="txt_firstName_TextChanged"></asp:TextBox>
         
         <h3>Last Name</h3>
-        <asp:TextBox ID="txt_lastName" class="profileSettingsTextBox" runat="server" CausesValidation="True"></asp:TextBox>
+        <asp:TextBox ID="txt_lastName" class="profileSettingsTextBox" runat="server" CausesValidation="True" AutoPostBack="True" OnTextChanged="txt_firstName_TextChanged"></asp:TextBox>
         
         <h3>Profile Image</h3>
         <div class="imageUploadTexts">
-            <asp:FileUpload ID="fup_picture" runat="server" />
+            <asp:FileUpload ID="fup_picture" runat="server" AutoPostBack="True" OnTextChanged="txt_firstName_TextChanged" />
             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="You can only upload JPG files." ControlToValidate="fup_picture" ValidationExpression="^.*\.(jpg|JPG|jpeg|JPEG|png|PNG)$"></asp:RegularExpressionValidator>
         </div>
 
         <h3>Email Address</h3>
-        <asp:TextBox ID="txt_email" class="profileSettingsTextBox"  runat="server" CausesValidation="True" TextMode="Email"></asp:TextBox>
+        <asp:TextBox ID="txt_email" class="profileSettingsTextBox"  runat="server" CausesValidation="True" TextMode="Email" AutoPostBack="True" OnTextChanged="txt_firstName_TextChanged"></asp:TextBox>
         
         <h3>Address</h3>
-        <asp:TextBox ID="txt_address1" class="profileSettingsTextBox" runat="server" CausesValidation="True"></asp:TextBox>
-        <asp:TextBox ID="txt_address2" class="profileSettingsTextBox" runat="server" CausesValidation="True"></asp:TextBox>
+        <asp:TextBox ID="txt_address1" class="profileSettingsTextBox" runat="server" CausesValidation="True" AutoPostBack="True" OnTextChanged="txt_firstName_TextChanged"></asp:TextBox>
+        <asp:TextBox ID="txt_address2" class="profileSettingsTextBox" runat="server" CausesValidation="True" AutoPostBack="True" OnTextChanged="txt_firstName_TextChanged"></asp:TextBox>
         
         <h3>City</h3>
-        <asp:TextBox ID="txt_city" class="profileSettingsTextBox" runat="server" CausesValidation="True"></asp:TextBox>
+        <asp:TextBox ID="txt_city" class="profileSettingsTextBox" runat="server" CausesValidation="True" AutoPostBack="True" OnTextChanged="txt_firstName_TextChanged"></asp:TextBox>
         
         <h3>Region</h3>
-        <asp:TextBox ID="txt_region" class="profileSettingsTextBox" runat="server" CausesValidation="True"></asp:TextBox>
+        <asp:TextBox ID="txt_region" class="profileSettingsTextBox" runat="server" CausesValidation="True" AutoPostBack="True" OnTextChanged="txt_firstName_TextChanged"></asp:TextBox>
 
         <h3>Postcode</h3>
-        <asp:TextBox ID="txt_postcode" class="profileSettingsTextBox" runat="server" CausesValidation="True"></asp:TextBox>
+        <asp:TextBox ID="txt_postcode" class="profileSettingsTextBox" runat="server" CausesValidation="True" AutoPostBack="True" OnTextChanged="txt_firstName_TextChanged"></asp:TextBox>
         <%--This VISA section is only for workers. Also, there should be an option for New Zealand born individuals, or immigrants that don't require a Visa (like Australians)
         <br />
         <br />
@@ -78,7 +78,12 @@
         <br />
         <br />
         <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" Text="Update Profile Settings"/>
-        </div>
+        <h3 style="text-align: center; margin-top: 20px;">Worker Registration Code</h3>
+        <asp:Button ID="btn_code" runat="server" OnClick="btn_code_Click" Text="Generate Code"/>
+        <asp:TextBox ReadOnly="true" ID="txt_code" class="profileSettingsTextBox" runat="server" CausesValidation="True" onfocus="this.select();" AutoPostBack="True" OnTextChanged="txt_firstName_TextChanged"></asp:TextBox>
+        
+    
+    </div>
         <div class="formThings" id="form-2">
             <h3 style="text-align: center; margin-top: 20px;">View Farm Details</h3>
             <asp:DropDownList ID="cbo_selectFarm" runat="server" DataSourceID="SqlDataSource1" DataTextField="Farm_Name" DataValueField="FarmId">
@@ -103,24 +108,24 @@ inner join [dbo].[tbl_farms] on [dbo].[tbl_farms].[FarmId]=[dbo].[tbl_address].[
             
             Farm Name</h3>
 
-        <asp:TextBox ID="txt_farmName" class="profileSettingsTextBox" runat="server" CausesValidation="True"></asp:TextBox>
+        <asp:TextBox ID="txt_farmName" class="profileSettingsTextBox" runat="server" CausesValidation="True" AutoPostBack="True" OnTextChanged="txt_firstName_TextChanged"></asp:TextBox>
 
         
         <h3>Address</h3>
-        <asp:TextBox ID="txt_addressFarm" class="profileSettingsTextBox" runat="server" CausesValidation="True"></asp:TextBox>
-        <asp:TextBox ID="txt_address2Farm" class="profileSettingsTextBox" runat="server" CausesValidation="True"></asp:TextBox>
+        <asp:TextBox ID="txt_addressFarm" class="profileSettingsTextBox" runat="server" CausesValidation="True" AutoPostBack="True" OnTextChanged="txt_firstName_TextChanged"></asp:TextBox>
+        <asp:TextBox ID="txt_address2Farm" class="profileSettingsTextBox" runat="server" CausesValidation="True" AutoPostBack="True" OnTextChanged="txt_firstName_TextChanged"></asp:TextBox>
         
         <h3>City</h3>
-        <asp:TextBox ID="txt_cityFarm" class="profileSettingsTextBox" runat="server" CausesValidation="True"></asp:TextBox>
+        <asp:TextBox ID="txt_cityFarm" class="profileSettingsTextBox" runat="server" CausesValidation="True" AutoPostBack="True" OnTextChanged="txt_firstName_TextChanged"></asp:TextBox>
         
         <h3>Region</h3>
-        <asp:TextBox ID="txt_regionFarm" class="profileSettingsTextBox" runat="server" CausesValidation="True"></asp:TextBox>
+        <asp:TextBox ID="txt_regionFarm" class="profileSettingsTextBox" runat="server" CausesValidation="True" AutoPostBack="True" OnTextChanged="txt_firstName_TextChanged"></asp:TextBox>
 
         <h3>Postcode</h3>
-        <asp:TextBox ID="txt_postcodeFarm" class="profileSettingsTextBox" runat="server" CausesValidation="True"></asp:TextBox>
+        <asp:TextBox ID="txt_postcodeFarm" class="profileSettingsTextBox" runat="server" CausesValidation="True" AutoPostBack="True" OnTextChanged="txt_firstName_TextChanged"></asp:TextBox>
         
         <asp:Button ID="btn_submitFarm" runat="server" Text="Submit Farm Details" OnClick="btn_submitFarm_Click"/>
-        <asp:Button ID="btn_cancel" runat="server" OnClick="btn_cancel_Click" Text="Return without Saving" />
+        <asp:Button ID="btn_cancel" runat="server" OnClick="btn_cancel_Click" Text="Return" />
     
     </div>
     </form>

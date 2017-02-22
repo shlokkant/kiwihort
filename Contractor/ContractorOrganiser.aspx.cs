@@ -239,6 +239,8 @@ public partial class ContractorOrganiser : System.Web.UI.Page
         }
 
 
+        
+
         if (IsPostBack && !Convert.ToBoolean(Session["flag"]) || !IsPostBack && Convert.ToBoolean(Session["flag"]))
         {
             cbo_weekStart2_SelectedIndexChanged(null, null);
@@ -295,7 +297,7 @@ public partial class ContractorOrganiser : System.Web.UI.Page
 
             
             
-            if (DateTime.Compare(d.convertUTCtoNZT(Convert.ToDateTime(cbo_weekStart.SelectedValue.ToString())).Date, d.convertUTCtoNZT(DateTime.UtcNow).Date) < 0)
+            if (DateTime.Compare(d.convertUTCtoNZT(Convert.ToDateTime(cbo_weekStart.SelectedValue.ToString())).Date, d.convertUTCtoNZT(DateTime.UtcNow).Date) <= 0)
             //if (d.convertUTCtoNZT(Convert.ToDateTime(cbo_weekStart.SelectedValue.ToString())) < d.convertUTCtoNZT(DateTime.UtcNow))
             {
                 int count = 0;
@@ -378,18 +380,18 @@ public partial class ContractorOrganiser : System.Web.UI.Page
 
                 SqlDataReader reader = com.ExecuteReader();
 
-                cbo_mondayFarm.Items.Clear();
-                cbo_tuesdayFarm.Items.Clear();
-                cbo_wednesdayFarm.Items.Clear();
-                cbo_thursdayFarm.Items.Clear();
-                cbo_fridayFarm.Items.Clear();
-                cbo_saturdayFarm.Items.Clear();
-                cbo_sundayFarm.Items.Clear();
-                cbo_workerAssignFarm.Items.Clear();
+                //cbo_mondayFarm.Items.Clear();
+                //cbo_tuesdayFarm.Items.Clear();
+                //cbo_wednesdayFarm.Items.Clear();
+                //cbo_thursdayFarm.Items.Clear();
+                //cbo_fridayFarm.Items.Clear();
+                //cbo_saturdayFarm.Items.Clear();
+                //cbo_sundayFarm.Items.Clear();
+                //cbo_workerAssignFarm.Items.Clear();
 
-                cbo_farmWorker.Items.Clear();
-                cbo_workerAssignFarm.Items.Add("Select a Farm");
-                cbo_farmWorker.Items.Add("All Farms");
+                //cbo_farmWorker.Items.Clear();
+                //cbo_workerAssignFarm.Items.Add("Select a Farm");
+                //cbo_farmWorker.Items.Add("All Farms");
                 //cbo_supervisorWorker.Items.Add("All Supervisors");
 
                 if (reader.HasRows)
@@ -418,15 +420,15 @@ public partial class ContractorOrganiser : System.Web.UI.Page
                         txt_fridayEnd.Enabled = true;
                         txt_saturdayEnd.Enabled = true;
                         txt_sundayEnd.Enabled = true;
-                        cbo_mondayFarm.Items.Add(new ListItem(reader.GetValue(0).ToString(), reader.GetValue(1).ToString()));
-                        cbo_tuesdayFarm.Items.Add(new ListItem(reader.GetValue(0).ToString(), reader.GetValue(1).ToString()));
-                        cbo_wednesdayFarm.Items.Add(new ListItem(reader.GetValue(0).ToString(), reader.GetValue(1).ToString()));
-                        cbo_thursdayFarm.Items.Add(new ListItem(reader.GetValue(0).ToString(), reader.GetValue(1).ToString()));
-                        cbo_fridayFarm.Items.Add(new ListItem(reader.GetValue(0).ToString(), reader.GetValue(1).ToString()));
-                        cbo_saturdayFarm.Items.Add(new ListItem(reader.GetValue(0).ToString(), reader.GetValue(1).ToString()));
-                        cbo_sundayFarm.Items.Add(new ListItem(reader.GetValue(0).ToString(), reader.GetValue(1).ToString()));
-                        cbo_workerAssignFarm.Items.Add(new ListItem(reader.GetValue(0).ToString(), reader.GetValue(1).ToString()));
-                        cbo_farmWorker.Items.Add(new ListItem(reader.GetValue(0).ToString(), reader.GetValue(1).ToString()));
+                        //cbo_mondayFarm.Items.Add(new ListItem(reader.GetValue(0).ToString(), reader.GetValue(1).ToString()));
+                        //cbo_tuesdayFarm.Items.Add(new ListItem(reader.GetValue(0).ToString(), reader.GetValue(1).ToString()));
+                        //cbo_wednesdayFarm.Items.Add(new ListItem(reader.GetValue(0).ToString(), reader.GetValue(1).ToString()));
+                        //cbo_thursdayFarm.Items.Add(new ListItem(reader.GetValue(0).ToString(), reader.GetValue(1).ToString()));
+                        //cbo_fridayFarm.Items.Add(new ListItem(reader.GetValue(0).ToString(), reader.GetValue(1).ToString()));
+                        //cbo_saturdayFarm.Items.Add(new ListItem(reader.GetValue(0).ToString(), reader.GetValue(1).ToString()));
+                        //cbo_sundayFarm.Items.Add(new ListItem(reader.GetValue(0).ToString(), reader.GetValue(1).ToString()));
+                        //cbo_workerAssignFarm.Items.Add(new ListItem(reader.GetValue(0).ToString(), reader.GetValue(1).ToString()));
+                        //cbo_farmWorker.Items.Add(new ListItem(reader.GetValue(0).ToString(), reader.GetValue(1).ToString()));
                     }
                 }
 
@@ -434,7 +436,10 @@ public partial class ContractorOrganiser : System.Web.UI.Page
             }
         }
 
-        
+        //sds_workers.SelectCommand = "SELECT [tbl_worker].[FirstName], [tbl_worker].[LastName], [tbl_worker].[WorkersId], [tbl_login].[type] FROM [tbl_worker] INNER JOIN [tbl_login] ON [tbl_login].[Id]=[tbl_worker].[WorkersId] INNER JOIN [dbo].[tbl_employees] on [dbo].[tbl_employees].[workersid]= [tbl_worker].[WorkersId] where [dbo].[tbl_employees].[growersid]=@0 ORDER BY [tbl_worker].[FirstName]";
+        //sds_workers.SelectParameters.Clear();
+        //sds_workers.SelectParameters.Add("0", Session["Id"].ToString());
+        //sds_workers.DataBind();
     }
 
     protected void btn_submit_Click(object sender, EventArgs e)
@@ -1593,7 +1598,7 @@ public partial class ContractorOrganiser : System.Web.UI.Page
         {
             case 1:
                 //com3 = new SqlCommand("SELECT [ShiftID],[Shiftstarttime],[ShiftendTime],[TotalTime],[Farm_Name] FROM tbl_Shift inner join[dbo].[tbl_farms]  on [dbo].[tbl_farms].[FarmId]=[dbo].[tbl_Shift].[farmId] WHERE ShiftID = @0", con);
-                SqlDataSource1.SelectCommand = "SELECT [dbo].[tbl_worker].[FirstName] AS 'First Name', [dbo].[tbl_worker].[LastName] AS 'Last Name',[Shiftstarttime] AS 'Start Time',[ShiftendTime] AS 'End Time',[Farm_Name] AS 'Farm Name' FROM tbl_Shift inner join [dbo].[tbl_farms] on [dbo].[tbl_farms].[FarmId]=[dbo].[tbl_Shift].[farmId] inner join [dbo].[tbl_duty] on [dbo].[tbl_duty].[ShiftID] = [dbo].[tbl_Shift].[shiftid] inner join [dbo].[tbl_worker] on [dbo].[tbl_worker].workersid = [dbo].[tbl_Duty].[WorkerID] WHERE tbl_duty.day = @date and ([dbo].[tbl_worker].firstname like '%'+ @search +'%' or [dbo].[tbl_worker].lastname like '%'+ @search +'%') order by [dbo].[tbl_worker].firstname";
+                SqlDataSource1.SelectCommand = "SELECT [dbo].[tbl_worker].[FirstName] AS 'First Name', [dbo].[tbl_worker].[LastName] AS 'Last Name',[Shiftstarttime] AS 'Start Time',[ShiftendTime] AS 'End Time',[Farm_Name] AS 'Farm Name' FROM tbl_Shift inner join [dbo].[tbl_farms] on [dbo].[tbl_farms].[FarmId]=[dbo].[tbl_Shift].[farmId] inner join [dbo].[tbl_duty] on [dbo].[tbl_duty].[ShiftID] = [dbo].[tbl_Shift].[shiftid] inner join [dbo].[tbl_worker] on [dbo].[tbl_worker].workersid = [dbo].[tbl_Duty].[WorkerID] WHERE tbl_duty.GrowerId = @grower and tbl_duty.day = @date and ([dbo].[tbl_worker].firstname like '%'+ @search +'%' or [dbo].[tbl_worker].lastname like '%'+ @search +'%') order by [dbo].[tbl_worker].firstname";
                 SqlDataSource1.SelectParameters.Add("search", txt_search.Text);
                 break;
 
@@ -1601,20 +1606,20 @@ public partial class ContractorOrganiser : System.Web.UI.Page
                 //com3 = new SqlCommand("SELECT [ShiftID],[Shiftstarttime],[ShiftendTime],[TotalTime],[Farm_Name] FROM tbl_Shift inner join[dbo].[tbl_farms]  on [dbo].[tbl_farms].[FarmId]=[dbo].[tbl_Shift].[farmId] WHERE ShiftID = @0 and [dbo].[tbl_Shift].[farmId] = @1", con);
                 //com3.Parameters.AddWithValue("@1", cbo_farmWorker.SelectedValue.ToString());
                 //SqlDataSource1.SelectCommand = com3.CommandText;
-                SqlDataSource1.SelectCommand = "SELECT [dbo].[tbl_worker].[FirstName] AS 'First Name', [dbo].[tbl_worker].[LastName] AS 'Last Name',[Shiftstarttime] AS 'Start Time',[ShiftendTime] AS 'End Time',[Farm_Name] AS 'Farm Name' FROM tbl_Shift inner join [dbo].[tbl_farms] on [dbo].[tbl_farms].[FarmId]=[dbo].[tbl_Shift].[farmId] inner join [dbo].[tbl_duty] on [dbo].[tbl_duty].[ShiftID] = [dbo].[tbl_Shift].[shiftid] inner join [dbo].[tbl_worker] on [dbo].[tbl_worker].workersid = [dbo].[tbl_Duty].[WorkerID] WHERE tbl_shift.farmid = @farmid and tbl_duty.day = @date and ([dbo].[tbl_worker].firstname like '%'+ @search +'%' or [dbo].[tbl_worker].lastname like '%'+ @search +'%') order by [dbo].[tbl_worker].firstname";
+                SqlDataSource1.SelectCommand = "SELECT [dbo].[tbl_worker].[FirstName] AS 'First Name', [dbo].[tbl_worker].[LastName] AS 'Last Name',[Shiftstarttime] AS 'Start Time',[ShiftendTime] AS 'End Time',[Farm_Name] AS 'Farm Name' FROM tbl_Shift inner join [dbo].[tbl_farms] on [dbo].[tbl_farms].[FarmId]=[dbo].[tbl_Shift].[farmId] inner join [dbo].[tbl_duty] on [dbo].[tbl_duty].[ShiftID] = [dbo].[tbl_Shift].[shiftid] inner join [dbo].[tbl_worker] on [dbo].[tbl_worker].workersid = [dbo].[tbl_Duty].[WorkerID] WHERE tbl_duty.GrowerId = @grower and tbl_shift.farmid = @farmid and tbl_duty.day = @date and ([dbo].[tbl_worker].firstname like '%'+ @search +'%' or [dbo].[tbl_worker].lastname like '%'+ @search +'%') order by [dbo].[tbl_worker].firstname";
                 SqlDataSource1.SelectParameters.Add("farmid", cbo_farmWorker.SelectedValue.ToString());
                 SqlDataSource1.SelectParameters.Add("search", txt_search.Text);
                 break;
             case 3:
                 //com3 = new SqlCommand("SELECT [ShiftID],[Shiftstarttime],[ShiftendTime],[TotalTime],[Farm_Name] FROM tbl_Shift inner join[dbo].[tbl_farms]  on [dbo].[tbl_farms].[FarmId]=[dbo].[tbl_Shift].[farmId] WHERE ShiftID = @0", con);
-                SqlDataSource1.SelectCommand = "SELECT [dbo].[tbl_worker].[FirstName] AS 'First Name', [dbo].[tbl_worker].[LastName] AS 'Last Name',[Shiftstarttime] AS 'Start Time',[ShiftendTime] AS 'End Time',[Farm_Name] AS 'Farm Name' FROM tbl_Shift inner join [dbo].[tbl_farms] on [dbo].[tbl_farms].[FarmId]=[dbo].[tbl_Shift].[farmId] inner join [dbo].[tbl_duty] on [dbo].[tbl_duty].[ShiftID] = [dbo].[tbl_Shift].[shiftid] inner join [dbo].[tbl_worker] on [dbo].[tbl_worker].workersid = [dbo].[tbl_Duty].[WorkerID] WHERE tbl_duty.day = @date order by [dbo].[tbl_worker].firstname";
+                SqlDataSource1.SelectCommand = "SELECT [dbo].[tbl_worker].[FirstName] AS 'First Name', [dbo].[tbl_worker].[LastName] AS 'Last Name',[Shiftstarttime] AS 'Start Time',[ShiftendTime] AS 'End Time',[Farm_Name] AS 'Farm Name' FROM tbl_Shift inner join [dbo].[tbl_farms] on [dbo].[tbl_farms].[FarmId]=[dbo].[tbl_Shift].[farmId] inner join [dbo].[tbl_duty] on [dbo].[tbl_duty].[ShiftID] = [dbo].[tbl_Shift].[shiftid] inner join [dbo].[tbl_worker] on [dbo].[tbl_worker].workersid = [dbo].[tbl_Duty].[WorkerID] WHERE tbl_duty.GrowerId = @grower and tbl_duty.day = @date order by [dbo].[tbl_worker].firstname";
                 break;
 
             case 4:
                 //com3 = new SqlCommand("SELECT [ShiftID],[Shiftstarttime],[ShiftendTime],[TotalTime],[Farm_Name] FROM tbl_Shift inner join[dbo].[tbl_farms]  on [dbo].[tbl_farms].[FarmId]=[dbo].[tbl_Shift].[farmId] WHERE ShiftID = @0 and [dbo].[tbl_Shift].[farmId] = @1", con);
                 //com3.Parameters.AddWithValue("@1", cbo_farmWorker.SelectedValue.ToString());
                 //SqlDataSource1.SelectCommand = com3.CommandText;
-                SqlDataSource1.SelectCommand = "SELECT [dbo].[tbl_worker].[FirstName] AS 'First Name', [dbo].[tbl_worker].[LastName] AS 'Last Name',[Shiftstarttime] AS 'Start Time',[ShiftendTime] AS 'End Time',[Farm_Name] AS 'Farm Name' FROM tbl_Shift inner join [dbo].[tbl_farms] on [dbo].[tbl_farms].[FarmId]=[dbo].[tbl_Shift].[farmId] inner join [dbo].[tbl_duty] on [dbo].[tbl_duty].[ShiftID] = [dbo].[tbl_Shift].[shiftid] inner join [dbo].[tbl_worker] on [dbo].[tbl_worker].workersid = [dbo].[tbl_Duty].[WorkerID] WHERE tbl_shift.farmid = @farmid and tbl_duty.day = @date order by [dbo].[tbl_worker].firstname";
+                SqlDataSource1.SelectCommand = "SELECT [dbo].[tbl_worker].[FirstName] AS 'First Name', [dbo].[tbl_worker].[LastName] AS 'Last Name',[Shiftstarttime] AS 'Start Time',[ShiftendTime] AS 'End Time',[Farm_Name] AS 'Farm Name' FROM tbl_Shift inner join [dbo].[tbl_farms] on [dbo].[tbl_farms].[FarmId]=[dbo].[tbl_Shift].[farmId] inner join [dbo].[tbl_duty] on [dbo].[tbl_duty].[ShiftID] = [dbo].[tbl_Shift].[shiftid] inner join [dbo].[tbl_worker] on [dbo].[tbl_worker].workersid = [dbo].[tbl_Duty].[WorkerID] WHERE tbl_duty.GrowerId = @grower and tbl_shift.farmid = @farmid and tbl_duty.day = @date order by [dbo].[tbl_worker].firstname";
                 SqlDataSource1.SelectParameters.Add("farmid", cbo_farmWorker.SelectedValue.ToString());
                 break;
 
@@ -1622,7 +1627,7 @@ public partial class ContractorOrganiser : System.Web.UI.Page
 
         //com3.Parameters.AddWithValue("@0", reader2["ShiftID"]);
         SqlDataSource1.SelectParameters.Add("date", dt4.Month.ToString() + "/" + dt4.Day.ToString() + "/" + dt4.Year.ToString());
-        
+        SqlDataSource1.SelectParameters.Add("grower", Session["Id"].ToString());
     
     dgd_organiserWorkers.DataSource = SqlDataSource1;
     dgd_organiserWorkers.DataBind();

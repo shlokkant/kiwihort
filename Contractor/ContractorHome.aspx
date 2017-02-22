@@ -7,25 +7,25 @@
 
     <div class="topStatsBox">
         <div class="singleStat">
-            <h4>Workers Employed in <asp:Label ID="lbl_month1" runat="server"></asp:Label></h4>
-            <h3><asp:Label ID="lbl_monthVal1" runat="server">XX</asp:Label></h3>
-            <%--<h3><asp:Label ID="lbl_workerRegion" runat="server" Text="lbl_workerRegion"></asp:Label></h3>--%>
-            <%--<h2></h2>--%>
+            <h4>Workers Employed This Month</h4>
+            <h3><asp:Label ID="lbl_monthVal4" runat="server">XX</asp:Label></h3>
         </div>
         <div class="singleStat">
-            <h4>Workers Employed in <asp:Label ID="lbl_month2" runat="server"></asp:Label></h4>
+            <h4>Workers Employed<br /><asp:Label ID="lbl_month3" runat="server"></asp:Label></h4>
+            <h3><asp:Label ID="lbl_monthVal3" runat="server">XX</asp:Label></h3>
+        </div>
+        <div class="singleStat">
+            <h4>Workers Employed<br /><asp:Label ID="lbl_month2" runat="server"></asp:Label></h4>
             <h3><asp:Label ID="lbl_monthVal2" runat="server">XX</asp:Label></h3>
             <%--<h4>Top workers in your region</h4>
             <h3>X</h3>
             <h2>For current month</h2>--%>
         </div>
         <div class="singleStat">
-            <h4>Workers Employed in <asp:Label ID="lbl_month3" runat="server"></asp:Label></h4>
-            <h3><asp:Label ID="lbl_monthVal3" runat="server">XX</asp:Label></h3>
-        </div>
-        <div class="singleStat">
-            <h4>Workers Employed This Month</h4>
-            <h3><asp:Label ID="lbl_monthVal4" runat="server">XX</asp:Label></h3>
+            <h4>Workers Employed<br /><asp:Label ID="lbl_month1" runat="server"></asp:Label></h4>
+            <h3><asp:Label ID="lbl_monthVal1" runat="server">XX</asp:Label></h3>
+            <%--<h3><asp:Label ID="lbl_workerRegion" runat="server" Text="lbl_workerRegion"></asp:Label></h3>--%>
+            <%--<h2></h2>--%>
         </div>
         <div class="singleStat-weather">
          <a href="http://www.accuweather.com/en/nz/tauranga/246959/weather-forecast/246959" class="aw-widget-legal">

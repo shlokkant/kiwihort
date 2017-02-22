@@ -11,20 +11,50 @@ public partial class ContractorProfile : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        btn_cancel.Attributes.Add("onClick", "javascript:history.back(); return false;");
+        if(!IsPostBack)
+        {
+            Session["SelectedFarm"] = String.Empty;
 
-        
+
+        }
+
+        SqlDataSource1.SelectCommand = "SELECT * FROM tbl_farms WHERE GrowerID = @0";
+        SqlDataSource1.SelectParameters.Clear();
+        SqlDataSource1.SelectParameters.Add("0", Session["Id"].ToString());
+        SqlDataSource1.DataBind();
+
+
         if (Session["Id"] == null)
         {
             Response.Redirect("~/login.aspx");
         }
         SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["KiwihortData"].ConnectionString);
+        con.Open();
+        SqlCommand comCode = new SqlCommand("SELECT code FROM tbl_growercode WHERE growersid = @0", con);
+        comCode.Parameters.AddWithValue("@0", Session["Id"].ToString());
+
+        SqlDataReader readerCode = comCode.ExecuteReader();
+
+        readerCode.Read();
+        if(readerCode.HasRows)
+        {
+            btn_code.Enabled = false;
+            btn_code.Visible = false;
+            txt_code.Text = readerCode.GetValue(0).ToString();
+            comCode.Dispose();
+        }
+        comCode.Dispose();
+        readerCode.Close();
+        
+        //txt_code.Enabled = false;
+
+
         SqlCommand com = null;
         SqlDataReader reader = null;
 
         try
         {
-            con.Open();
+            
 
 
 
@@ -96,6 +126,37 @@ public partial class ContractorProfile : System.Web.UI.Page
         txt_region.Text = txt_region.Text.TrimEnd();
 
         con.Close();
+        con.Dispose();
+    }
+
+    protected void btn_code_Click(object sender, EventArgs e)
+    {
+        txt_code.Text = Guid.NewGuid().ToString();
+
+        SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["KiwihortData"].ConnectionString);
+        con.Open();
+        SqlCommand comCheck = new SqlCommand("SELECT * FROM tbl_growercode WHERE growersid = @0", con);
+        comCheck.Parameters.AddWithValue("@0", Session["Id"].ToString());
+
+        SqlDataReader reader = comCheck.ExecuteReader();
+
+        reader.Read();
+        comCheck.Dispose();
+        if(reader.HasRows)
+        {
+            SqlCommand comDelete = new SqlCommand("DELETE FROM tbl_growercode WHERE growersid = @0", con);
+            comDelete.Parameters.AddWithValue("@0", Session["Id"].ToString());
+            comDelete.ExecuteScalar();
+            comDelete.Dispose();
+        }
+
+        SqlCommand com = new SqlCommand("INSERT INTO tbl_growercode (growersid, code) VALUES (@0, @1)", con);
+        com.Parameters.AddWithValue("@0", Session["Id"]);
+        com.Parameters.AddWithValue("@1", txt_code.Text);
+
+        com.ExecuteReader();
+
+        com.Dispose();
         con.Dispose();
     }
 
@@ -360,7 +421,7 @@ public partial class ContractorProfile : System.Web.UI.Page
 
     protected void btn_submitFarm_Click(object sender, EventArgs e)
     {
-        
+        btn_cancel.Text = "Return";
 
         SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["KiwihortData"].ConnectionString);
         SqlCommand comAddress = null;
@@ -377,6 +438,10 @@ public partial class ContractorProfile : System.Web.UI.Page
 
         if (Session["SelectedFarm"].ToString() != String.Empty)
         {
+            comFarm = new SqlCommand("UPDATE tbl_farms SET farm_name = @0 WHERE FarmId = @1", con);
+            comFarm.Parameters.AddWithValue("@0", txt_farmName.Text);
+            comFarm.Parameters.AddWithValue("@1", Session["SelectedFarm"].ToString());
+
             comAddress = new SqlCommand("UPDATE tbl_address SET Address1 = @1, address2 = @2, city = @3, region = @4, postcode = @5 WHERE AddressId = @0", con);
             comAddress.Parameters.AddWithValue("@0", Session["SelectedFarm"].ToString());
             comAddress.Parameters.AddWithValue("@1", txt_addressFarm.Text);
@@ -385,8 +450,10 @@ public partial class ContractorProfile : System.Web.UI.Page
             comAddress.Parameters.AddWithValue("@4", txt_regionFarm.Text);
             comAddress.Parameters.AddWithValue("@5", txt_postcodeFarm.Text);
 
+            comFarm.ExecuteReader();
             comAddress.ExecuteReader();
 
+            comFarm.Dispose();
             comAddress.Dispose();
 
             Session["SelectedFarm"] = String.Empty;
@@ -468,5 +535,11 @@ public partial class ContractorProfile : System.Web.UI.Page
             txt_regionFarm.Text = "";
             txt_postcodeFarm.Text = "";
         }
+    }
+
+    protected void txt_firstName_TextChanged(object sender, EventArgs e)
+    {
+        //btn_cancel.Text = "Return without Saving";
+        btn_cancel.Text = "Return without Saving";
     }
 }
